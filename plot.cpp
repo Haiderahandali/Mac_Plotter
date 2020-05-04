@@ -23,9 +23,18 @@ plot::~plot()
 
 void plot::on_pushButton_clicked()
 {
-    double x_right = ui->xmax_text->toPlainText().toDouble();
-    double x_left = ui->xmin_text->toPlainText().toDouble();
-    double step = ui->step->toPlainText().toDouble();
+    bool validate;
+    double x_right = ui->xmax_text->toPlainText().toDouble(&validate) ;
+    if (validate == false)
+        x_right = 1;
+
+
+    double x_left = ui->xmin_text->toPlainText().toDouble(&validate);
+    if (validate == false)
+        x_left = -1;
+    double step = ui->step->toPlainText().toDouble(&validate);
+        if(validate == false)
+            step = 0.25;
     // generate some data:
 
     QVector<double> x; // initialize with entries 0..100
